@@ -107,7 +107,7 @@ export default function OurServices() {
             <Tilt key={index} tiltMaxAngleX={10} tiltMaxAngleY={10} glareEnable glareBorderRadius="12px">
               <div
                 ref={(el) => (cardRefs.current[index] = el)}
-                className="p-6 rounded-lg shadow-lg bg-white/70 dark:bg-gray-800/70 backdrop-blur-none flex flex-col items-center text-center transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-transparent hover:border-[#75A56F] relative h-full"
+                className="p-6 rounded-lg shadow-lg bg-white/10 dark:bg-gray-800/70 backdrop-blur-none flex flex-col items-center text-center transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-transparent hover:border-[#75A56F] relative h-full"
               >
                 <img src={service.icon} alt="Icon" className="w-16 h-16 mb-4 transition-transform duration-300 hover:scale-110" />
                 <h3 className="text-2xl font-bold text-[#75A56F]">{service.title}</h3>
