@@ -4,7 +4,7 @@ import Image from "next/image";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const projects = [
-  { id: 1, company: "Dinkes Kota Bogor", title: "SiGeulis (Sistem Informasi Gerakan Eliminasi Tuberkolosis)", img: "/sigeulis.png" },
+  { id: 1, company: "Dinkes Kota Bogor", title: "SiGeulis (Sistem Informasi Gerakan Eliminasi Tuberkolosis)", img: "/Sigeulis.png" },
   { id: 2, company: "PSMK Disdik Jabar", title: "Sistem Informasi Pusaka Disdik Provinsi Jawa Barat (Pusat Data SMK)", img: "/Rasajaga.png" },
   { id: 3, company: "Kemkominfo RI", title: "SIM-Pandu Digital Indonesia", img: "/Pandu.png" },
   { id: 4, company: "Kemkominfo RI", title: "EMS Literasi Digital", img: "/EMS.png" },

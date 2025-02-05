@@ -70,21 +70,21 @@ export default function About() {
   }, []);
 
   return (
-    <section ref={aboutRef} className="relative py-24 overflow-hidden">
-      <div className="container mx-auto px-6 max-w-7xl">
+    <section ref={aboutRef} className="relative py-16 md:py-24 overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
         {/* Section Header */}
-        <div className="text-center mb-20">
-          <h2 className="text-5xl font-bold bg-gradient-to-r from-[#75A56F] to-[#4B7355] bg-clip-text text-transparent">
+        <div className="text-center mb-12 md:mb-20">
+          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-[#75A56F] to-[#4B7355] bg-clip-text text-transparent">
             About Us
           </h2>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="mt-4 text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-4">
             Menyediakan solusi inovatif berbasis teknologi yang menghubungkan generasi
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Image Section with Enhanced Hover Effect */}
-          <div ref={imageRef} className="relative group">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-center">
+          {/* Image Section */}
+          <div ref={imageRef} className="relative group mx-auto max-w-sm md:max-w-md lg:max-w-full">
             <div className="book transform transition-all duration-700 hover:scale-105">
               {/* Front Cover with Professional Styling */}
               <div className="cover relative overflow-hidden rounded-xl shadow-2xl">
@@ -122,8 +122,8 @@ export default function About() {
             </div>
           </div>
 
-          {/* Text Content with Enhanced Typography */}
-          <div ref={textRef} className="space-y-8">
+          {/* Text Content */}
+          <div ref={textRef} className="space-y-6 md:space-y-8 px-4">
             <div className="overflow-hidden">
               <h3 className="text-3xl font-bold text-[#75A56F] mb-6">
                 TENTANG <span className="text-gray-900 dark:text-white">SAGE SOLUTION</span>
@@ -152,8 +152,8 @@ export default function About() {
               </p>
             </div>
 
-            {/* Added Achievement Metrics */}
-            <div className="grid grid-cols-2 gap-6 mt-8">
+            {/* Achievement Metrics */}
+            <div className="grid grid-cols-2 gap-4 md:gap-6 mt-8">
               {[
                 { number: "200+", label: "Proyek Selesai" },
                 { number: "50+", label: "Klien Aktif" },

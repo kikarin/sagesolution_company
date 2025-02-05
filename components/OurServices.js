@@ -3,8 +3,6 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Tilt from "react-parallax-tilt";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -118,20 +116,6 @@ export default function OurServices() {
                   <span className="absolute top-0 left-0 w-0 h-full bg-white opacity-20 transition-all duration-300 group-hover:w-full"></span>
                   <span className="relative z-10">Hubungi Kami</span>
                 </button>
-
-                {/* Objek 3D di Kartu Terakhir */}
-                {index === services.length - 1 && (
-                  <div className="absolute right-[-480px] top-[170px] transform -translate-y-1/2 w-[200px] h-[200px] hidden lg:block">
-                    <Canvas>
-                      <OrbitControls enableZoom={false} />
-                      <ambientLight intensity={0.9} />
-                      <directionalLight position={[2, 12, 5]} intensity={1} />
-                      <Sphere args={[1, 100, 600]} scale={2.5}>
-                        <MeshDistortMaterial color="#75A56F" attach="material" distort={0.5} speed={5} />
-                      </Sphere>
-                    </Canvas>
-                  </div>
-                )}
               </div>
             </Tilt>
           ))}

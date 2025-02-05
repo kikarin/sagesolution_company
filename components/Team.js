@@ -78,20 +78,20 @@ const teamMembers = [
 
 export default function Team() {
   return (
-    <section className="text-center py-1">
-      <h2 className="text-3xl font-bold text-[#75A56F]">
+    <section className="text-center py-16 md:py-20 px-4">
+      <h2 className="text-2xl md:text-3xl font-bold text-[#75A56F]">
         Skill Expert Team
       </h2>
-      <p className="text-lg text-gray-900 dark:text-gray-50 mt-2">
+      <p className="text-base md:text-lg text-gray-900 dark:text-gray-50 mt-2">
         Berkenalan Dengan Tim Profesional Kami
       </p>
-      <p className="text-md text-gray-900 dark:text-gray-50 mt-2 max-w-2xl mx-auto">
+      <p className="text-sm md:text-md text-gray-900 dark:text-gray-50 mt-2 max-w-2xl mx-auto px-4">
         Terdiri dari para profesional berpengalaman, kami siap memberikan solusi
         terbaik dengan keahlian dan dedikasi tinggi di setiap proyek yang kami
         tangani.
       </p>
 
-      <div className="wrapper mt-6">
+      <div className="wrapper mt-6 h-[400px] md:h-[600px]">
         <div className="inner" style={{ "--quantity": teamMembers.length }}>
           {teamMembers.map((member, index) => (
             <div key={member.id} className="card" style={{ "--index": index }}>
