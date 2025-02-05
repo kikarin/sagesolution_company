@@ -1,22 +1,16 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { useDarkMode } from "../components/DarkModeProvider";
-import * as THREE from "three";
+import { useDarkMode } from "./DarkModeProvider";
 
 export default function Background() {
   const { darkMode } = useDarkMode();
   const canvasRef = useRef(null);
-  const particles = useRef([]);
-  const animationFrameId = useRef(null);
-  const threeCanvasRef = useRef(null);
-  const objectRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
 
-    // Set canvas size
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -24,133 +18,96 @@ export default function Background() {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    const particleCount = 100;
-    particles.current = [];
-
-    // Particle class
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = Math.random() * 2 - 1;
-        this.speedY = Math.random() * 2 - 1;
-      }
-
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x > canvas.width) this.x = 0;
-        if (this.y > canvas.height) this.y = 0;
-      }
-
-      draw() {
-        ctx.fillStyle = darkMode ? "rgba(255, 255, 255, 0.3)" : "rgba(117, 165, 111, 0.5)";
-        ctx.shadowColor = darkMode ? "rgba(255, 255, 255, 0.8)" : "rgba(117, 165, 111, 0.8)";
-        ctx.shadowBlur = 10;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    for (let i = 0; i < particleCount; i++) {
-      particles.current.push(new Particle());
-    }
-
-    const animateParticles = () => {
-      ctx.fillStyle = darkMode ? "rgba(22, 22, 22, 1)" : "rgba(255, 255, 255, 1)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      for (let particle of particles.current) {
-        particle.update();
-        particle.draw();
-      }
-      animationFrameId.current = requestAnimationFrame(animateParticles);
-    };
-
-    animateParticles();
-
-    return () => {
-      window.removeEventListener("resize", resizeCanvas);
-      cancelAnimationFrame(animationFrameId.current);
-    };
-  }, [darkMode]);
-
-  useEffect(() => {
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    );
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    threeCanvasRef.current.appendChild(renderer.domElement);
-
-    // **Bentuk Torus (Donat 3D)**
-    const geometry = new THREE.TorusGeometry(1, 0.4, 16, 100);
-    const material = new THREE.MeshStandardMaterial({
-      color: 0xffffff, // Warna default (diubah di useEffect lain)
-      roughness: 0.4,
-      metalness: 0.6,
-    });
-
-    const torus = new THREE.Mesh(geometry, material);
-    torus.visible = darkMode; // Sembunyikan di mode light
-    objectRef.current = torus;
-    scene.add(torus);
-
-    // **Tambahkan lighting**
-    const light = new THREE.PointLight(0xffffff, 1);
-    light.position.set(3, 3, 5);
-    scene.add(light);
-
-    camera.position.z = 5;
-
-    // **Efek mengikuti mouse**
-    const onMouseMove = (event) => {
-      let mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-      let mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-
-      if (torus.visible) {
-        torus.position.x = mouseX * 2;
-        torus.position.y = mouseY * 2;
-      }
-    };
-
-    window.addEventListener("mousemove", onMouseMove);
+    let gradientAngle = 0;
 
     const animate = () => {
-      if (torus.visible) {
-        torus.rotation.y += 0.02;
-        torus.rotation.x += 0.01;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Updated gradients for better visual comfort
+      const gradient = ctx.createLinearGradient(
+        canvas.width / 2,
+        0,
+        canvas.width / 2,
+        canvas.height
+      );
+
+      if (darkMode) {
+        gradient.addColorStop(0, "rgba(17, 24, 39, 1)");
+        gradient.addColorStop(0.5, "rgba(31, 41, 55, 1)");
+        gradient.addColorStop(1, "rgba(17, 24, 39, 1)");
+      } else {
+        // Softer light mode colors
+        gradient.addColorStop(0, "rgba(249, 250, 251, 1)"); // Very light gray
+        gradient.addColorStop(0.5, "rgba(243, 244, 246, 1)"); // Slightly darker
+        gradient.addColorStop(1, "rgba(249, 250, 251, 1)");
       }
-      renderer.render(scene, camera);
+
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Subtle grid pattern
+      const patternSize = 40;
+      ctx.strokeStyle = darkMode 
+        ? "rgba(255, 255, 255, 0.03)" 
+        : "rgba(0, 0, 0, 0.02)"; // Reduced opacity for light mode
+      ctx.lineWidth = 1;
+
+      for (let x = 0; x < canvas.width; x += patternSize) {
+        for (let y = 0; y < canvas.height; y += patternSize) {
+          ctx.beginPath();
+          ctx.rect(x, y, patternSize, patternSize);
+          ctx.stroke();
+        }
+      }
+
+      // Accent lines with brand color
+      const accentColor = darkMode
+        ? "rgba(117, 165, 111, 0.1)"
+        : "rgba(117, 165, 111, 0.03)"; // Reduced opacity for light mode
+
+      ctx.strokeStyle = accentColor;
+      ctx.lineWidth = 2;
+
+      const lineCount = 4; // Reduced number of lines
+      const spacing = canvas.width / lineCount;
+
+      for (let i = 0; i < lineCount; i++) {
+        const x = (i * spacing + gradientAngle) % canvas.width;
+        
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x + canvas.height, canvas.height);
+        ctx.stroke();
+      }
+
+      gradientAngle += 0.15; // Slower animation
+      if (gradientAngle >= canvas.width) {
+        gradientAngle = 0;
+      }
+
       requestAnimationFrame(animate);
     };
 
     animate();
 
     return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      threeCanvasRef.current.removeChild(renderer.domElement);
+      window.removeEventListener("resize", resizeCanvas);
     };
-  }, []);
-
-  // **Update visibilitas & warna saat mode berubah**
-  useEffect(() => {
-    if (objectRef.current) {
-      objectRef.current.visible = darkMode; // Muncul di mode dark
-      objectRef.current.material.color.set(0xffffff); // Warna tetap putih di dark mode
-    }
   }, [darkMode]);
 
   return (
     <div className="fixed top-0 left-0 w-full h-full z-0">
-      <canvas ref={canvasRef} />
-      <div ref={threeCanvasRef} className="absolute top-0 left-0 w-full h-full" />
+      <canvas 
+        ref={canvasRef} 
+        className="w-full h-full transition-opacity duration-500"
+      />
+      
+      {/* Enhanced overlay gradient */}
+      <div className={`absolute inset-0 pointer-events-none ${
+        darkMode 
+          ? 'bg-gradient-to-b from-transparent via-gray-900/20 to-transparent'
+          : 'bg-gradient-to-b from-transparent via-gray-50/30 to-transparent'
+      }`} />
     </div>
   );
 }

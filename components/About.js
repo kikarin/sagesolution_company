@@ -2,129 +2,171 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
   const aboutRef = useRef(null);
   const textRef = useRef(null);
+  const imageRef = useRef(null);
 
   useEffect(() => {
-    // Animasi Scroll GSAP
+    // Enhanced scroll animations
     gsap.fromTo(
       aboutRef.current,
-      { opacity: 0, y: 50 },
+      { opacity: 0 },
       {
         opacity: 1,
-        y: 0,
-        duration: 1.2,
-        ease: "power3.out",
+        duration: 1,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: aboutRef.current,
-          start: "top 80%",
-          end: "bottom 60%",
-          toggleActions: "play none none none",
+          start: "top 85%",
         },
       }
     );
 
+    // Staggered text animation
     gsap.fromTo(
       textRef.current.children,
-      { opacity: 0, x: 50 },
+      { 
+        opacity: 0, 
+        y: 30,
+        clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)"
+      },
       {
         opacity: 1,
-        x: 0,
-        duration: 1.5,
-        ease: "power3.out",
+        y: 0,
+        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+        duration: 1,
         stagger: 0.2,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: textRef.current,
+          start: "top 80%",
+        },
+      }
+    );
+
+    // Image reveal animation
+    gsap.fromTo(
+      imageRef.current,
+      { 
+        scale: 0.9,
+        opacity: 0,
+      },
+      {
+        scale: 1,
+        opacity: 1,
+        duration: 1.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: imageRef.current,
           start: "top 85%",
-          end: "bottom 65%",
-          toggleActions: "play none none none",
         },
       }
     );
   }, []);
 
   return (
-    <section
-      ref={aboutRef}
-      className="relative py-20 text-gray-900 dark:text-gray-100"
-    >
-      <div className="container mx-auto px-6 max-w-6xl">
-        {/* Judul Section */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl text-[#75A56F] md:text-5xl font-bold">About Us</h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 mt-4">
-            Menyediakan solusi inovatif berbasis teknologi yang menghubungkan generasi.
+    <section ref={aboutRef} className="relative py-24 overflow-hidden">
+      <div className="container mx-auto px-6 max-w-7xl">
+        {/* Section Header */}
+        <div className="text-center mb-20">
+          <h2 className="text-5xl font-bold bg-gradient-to-r from-[#75A56F] to-[#4B7355] bg-clip-text text-transparent">
+            About Us
+          </h2>
+          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            Menyediakan solusi inovatif berbasis teknologi yang menghubungkan generasi
           </p>
         </div>
 
-        {/* Grid Content */}
-        <div className="grid md:grid-cols-2 gap-10 items-center">
-          {/* Bagian Kiri - Gambar dengan Overlay */}
-          <div className="relative flex justify-center">
-  <div className="book">
-    {/* Cover Depan */}
-    <div className="cover">
-      <img
-        src="/2.png"
-        alt="Tentang Kami"
-        className="w-full h-full object-cover rounded-lg"
-      />
-      {/* Hover Me Message */}
-      <span className="hover-message">Hover Me</span>
-    </div>
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Image Section with Enhanced Hover Effect */}
+          <div ref={imageRef} className="relative group">
+            <div className="book transform transition-all duration-700 hover:scale-105">
+              {/* Front Cover with Professional Styling */}
+              <div className="cover relative overflow-hidden rounded-xl shadow-2xl">
+                <Image
+                  src="/2.png"
+                  alt="Tentang Kami"
+                  width={600}
+                  height={800}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </div>
 
-    {/* Konten di Dalam Flip */}
-    <div className="inner-content text-center p-6">
-      <h3>15 Tahun</h3>
-      <p>Berpengalaman di Bidang Teknologi</p>
+              {/* Enhanced Content Reveal */}
+              <div className="inner-content text-center p-8 bg-gradient-to-br from-[#75A56F] to-[#4B7355]">
+                <h3 className="text-2xl font-bold text-white mb-4">15 Tahun Pengalaman</h3>
+                <div className="space-y-4">
+                  {[
+                    "Fokus pada kepuasan pelanggan",
+                    "Efisiensi Biaya dengan Hasil Maksimal",
+                    "Pendekatan custom dan inovatif",
+                    "Pemeliharaan Proaktif",
+                    "Skalabilitas yang fleksibel",
+                    "Transparansi penuh"
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-center space-x-3 text-white/90 hover:text-white transition-colors">
+                      <svg className="w-5 h-5 text-white/80" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
 
-      <ul className="mt-4">
-        <li>Fokus pada kepuasan pelanggan</li>
-        <li>Efisiensi Biaya dengan Hasil Maksimal</li>
-        <li>Pendekatan custom dan inovatif</li>
-        <li>Pemeliharaan Proaktif</li>
-        <li>Skalabilitas yang fleksibel</li>
-        <li>Transparansi penuh</li>
-      </ul>
-    </div>
-  </div>
-</div>
+          {/* Text Content with Enhanced Typography */}
+          <div ref={textRef} className="space-y-8">
+            <div className="overflow-hidden">
+              <h3 className="text-3xl font-bold text-[#75A56F] mb-6">
+                TENTANG <span className="text-gray-900 dark:text-white">SAGE SOLUTION</span>
+              </h3>
+            </div>
 
+            <div className="overflow-hidden">
+              <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                Selamat datang di{" "}
+                <span className="font-semibold relative inline-block group">
+                  PT Sinergi Antar Generasi
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#75A56F] transition-all duration-300 group-hover:w-full"></span>
+                </span>
+                ! Kami menghadirkan solusi terbaik untuk mendukung pertumbuhan industri dan masyarakat.
+              </p>
+            </div>
 
+            <div className="overflow-hidden">
+              <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                Sebagai perusahaan penyedia layanan TIK,{" "}
+                <span className="font-semibold relative inline-block group">
+                  SAGE
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#75A56F] transition-all duration-300 group-hover:w-full"></span>
+                </span>{" "}
+                dipercaya dalam menciptakan solusi digital yang praktis dan efisien.
+              </p>
+            </div>
 
-{/* Bagian Kanan - Teks yang Ditingkatkan */}
-<div ref={textRef} className="relative">
-  {/* Animasi Teks dengan GSAP */}
-  <h3 className="text-2xl font-semibold text-[#75A56F] opacity-0 transform translate-x-10">
-    TENTANG <span className="text-gradient">SAGE SOLUTION</span>
-  </h3>
-
-  {/* Teks Deskripsi dengan Animasi & Hover Effect */}
-  <p className="mt-6 text-lg leading-relaxed opacity-0 transform translate-x-10 transition-all duration-700 hover:text-gray-800 dark:hover:text-gray-200">
-    Selamat datang di{" "}
-    <span className="relative font-semibold group">
-      PT Sinergi Antar Generasi
-      <span className="absolute bottom-0 left-0 w-0 h-1 bg-[#75A56F] transition-all duration-500 group-hover:w-full"></span>
-    </span>!  
-    Kami menghadirkan solusi terbaik untuk mendukung pertumbuhan industri dan masyarakat.
-  </p>
-
-  <p className="mt-4 text-lg leading-relaxed opacity-0 transform translate-x-10 transition-all duration-700 hover:text-gray-800 dark:hover:text-gray-200">
-    Sebagai perusahaan penyedia layanan TIK,{" "}
-    <span className="relative font-semibold group">
-      SAGE
-      <span className="absolute bottom-0 left-0 w-0 h-1 bg-[#75A56F] transition-all duration-500 group-hover:w-full"></span>
-    </span>  
-    dipercaya dalam menciptakan solusi digital yang praktis dan efisien.
-  </p>
-
- 
-</div>
-
+            {/* Added Achievement Metrics */}
+            <div className="grid grid-cols-2 gap-6 mt-8">
+              {[
+                { number: "200+", label: "Proyek Selesai" },
+                { number: "50+", label: "Klien Aktif" },
+                { number: "15+", label: "Tahun Pengalaman" },
+                { number: "98%", label: "Tingkat Kepuasan" }
+              ].map((stat, index) => (
+                <div key={index} className="text-center p-4 rounded-lg bg-gray-200 dark:bg-gray-800/50 backdrop-blur-sm">
+                  <div className="text-2xl font-bold text-[#75A56F]">{stat.number}</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

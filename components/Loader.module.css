@@ -18,10 +18,7 @@
   background: linear-gradient(135deg, #8cb486, #75a56f);
 }
 
-/* 🌙 Mode Dark */
-.darkMode {
-  background: linear-gradient(135deg, #1a1a1a, #0e0e0e);
-}
+
 
 /* 🔥 Efek Overlay Transisi */
 .overlay {
@@ -88,13 +85,7 @@
                9px 9px 0px rgba(0, 0, 0, 0.1);
 }
 
-/* 🌙 Dark Mode - Efek Glowing */
-.darkMode .loader span {
-  color: var(--dark-text-color) !important;
-  text-shadow: 0px 0px 10px var(--dark-text-color),
-               0px 0px 20px var(--dark-shadow-color),
-               0px 0px 30px rgba(0, 255, 0, 0.2);
-}
+
 
 /* 🔢 Delay animasi per huruf */
 .char0 { animation-delay: calc(var(--ANIMATION-DELAY-MULTIPLIER) * 0); }
