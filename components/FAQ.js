@@ -60,10 +60,8 @@ export default function FAQ() {
                 />
               </button>
               <div
-                className={`grid transition-all duration-500 ease-in-out overflow-hidden ${
-                  openIndex === index
-                    ? "grid-rows-[1fr] opacity-100 p-6 bg-gray-50 dark:bg-gray-700"
-                    : "grid-rows-[0fr] opacity-0 p-0"
+                className={`transition-all duration-500 ease-in-out overflow-hidden ${
+                  openIndex === index ? "max-h-40 opacity-100 p-6 bg-gray-50 dark:bg-gray-700" : "max-h-0 opacity-0 p-0"
                 }`}
               >
                 <p className="text-gray-700 dark:text-gray-300">{faq.answer}</p>
