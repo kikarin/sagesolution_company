@@ -1,0 +1,126 @@
+/* 🔲 Pastikan loader berada di tengah layar */
+.loaderContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: all 1s ease-in-out;
+  overflow: hidden;
+}
+
+/* 🌞 Mode Light */
+.lightMode {
+  background: linear-gradient(135deg, #8cb486, #75a56f);
+}
+
+/* 🌙 Mode Dark */
+.darkMode {
+  background: linear-gradient(135deg, #1a1a1a, #0e0e0e);
+}
+
+/* 🔥 Efek Overlay Transisi */
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  animation: fadeInOverlay 1.5s ease-in-out forwards;
+}
+
+/* 🎭 Animasi Overlay Masuk */
+@keyframes fadeInOverlay {
+  0% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* 🔥 Efek Smooth Fade-In & Out */
+.show {
+  opacity: 1;
+  transform: scale(1);
+}
+.hide {
+  opacity: 0;
+  transform: scale(1.1);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+/* 🔠 Loader teks */
+.loader {
+  --light-text-color: #181e17;
+  --light-shadow-color: #e8f0e6;
+  --dark-text-color: #75a56f; /* 🟢 Warna hijau terang di mode dark */
+  --dark-shadow-color: rgba(255, 255, 255, 0.3);
+  --ANIMATION-DELAY-MULTIPLIER: 70ms;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* 🔥 Efek Elastic Bounce */
+.loader span {
+  font-size: 5rem;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+  letter-spacing: -0.1rem;
+  transform: translateY(4rem) scale(0.9);
+  animation: bounceIn 1s alternate infinite cubic-bezier(0.86, 0, 0.07, 1);
+  
+  /* 🌞 Light Mode */
+  color: var(--light-text-color);
+  text-shadow: 3px 3px 0px var(--light-shadow-color),
+               6px 6px 0px var(--light-shadow-color),
+               9px 9px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* 🌙 Dark Mode - Efek Glowing */
+.darkMode .loader span {
+  color: var(--dark-text-color) !important;
+  text-shadow: 0px 0px 10px var(--dark-text-color),
+               0px 0px 20px var(--dark-shadow-color),
+               0px 0px 30px rgba(0, 255, 0, 0.2);
+}
+
+/* 🔢 Delay animasi per huruf */
+.char0 { animation-delay: calc(var(--ANIMATION-DELAY-MULTIPLIER) * 0); }
+.char1 { animation-delay: calc(var(--ANIMATION-DELAY-MULTIPLIER) * 1); }
+.char2 { animation-delay: calc(var(--ANIMATION-DELAY-MULTIPLIER) * 2); }
+.char3 { animation-delay: calc(var(--ANIMATION-DELAY-MULTIPLIER) * 3); }
+.char4 { animation-delay: calc(var(--ANIMATION-DELAY-MULTIPLIER) * 4); }
+.char5 { animation-delay: calc(var(--ANIMATION-DELAY-MULTIPLIER) * 5); }
+.char6 { animation-delay: calc(var(--ANIMATION-DELAY-MULTIPLIER) * 6); }
+.char7 { animation-delay: calc(var(--ANIMATION-DELAY-MULTIPLIER) * 7); }
+.char8 { animation-delay: calc(var(--ANIMATION-DELAY-MULTIPLIER) * 8); }
+.char9 { animation-delay: calc(var(--ANIMATION-DELAY-MULTIPLIER) * 9); }
+.char10 { animation-delay: calc(var(--ANIMATION-DELAY-MULTIPLIER) * 10); }
+
+/* 🎭 Animasi naik-turun dengan Elastic Bounce */
+@keyframes bounceIn {
+  0% {
+    transform: translateY(4rem) scale(0.8);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(-1rem) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0rem) scale(1);
+    opacity: 1;
+  }
+}

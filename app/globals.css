@@ -2,20 +2,334 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Tambahan style global */
+body {
+  @apply bg-background text-headline font-barlow ;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* team.css */
+.wrapper {
+  position: absolute;
+  width: 100%;
+  height: 600px;
+  position: relative;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.inner {
+  --w: 190px;
+  --h: 310px;
+  --translateZ: calc(var(--w) * 1.6);
+  --rotateX: -4deg;
+  --perspective: 1000px;
+  width: var(--w);
+  height: var(--h);
+  left: calc(50% - (var(--w) / 2));
+  transform-style: preserve-3d;
+  transform: perspective(var(--perspective));
+  animation: rotating 20s linear infinite;
+}
+
+@keyframes rotating {
+  from {
+    transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(0);
+  }
+  to {
+    transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(1turn);
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.card {
+  position: absolute;
+  border: 2px solid #75A56F;
+  border-radius: 12px;
+  overflow: hidden;
+  inset: 0;
+  transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ));
+  transition: transform 0.3s ease-in-out;
 }
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* atau 'contain' sesuai kebutuhan */
+  image-rendering: crisp-edges;
+  background: radial-gradient(circle, rgba(117, 165, 111, 0.4) 20%, rgba(117, 165, 111, 0.8) 90%);
+}
+
+/* Social Media Styling */
+.content {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  text-align: center;
+  transition: transform 0.5s;
+}
+
+.card:hover .content {
+  transform: translateX(-50%) scale(1);
+  bottom: 25px;
+}
+
+.content .title {
+  color: #fff;
+  font-weight: 500;
+  line-height: 1em;
+  font-size: 1em;
+  text-transform: uppercase;
+}
+
+.content .title span {
+  font-weight: 300;
+  font-size: 0.8em;
+}
+
+.sci {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.sci li {
+  list-style: none;
+}
+
+.sci li .icon {
+  width: 20px;
+  height: 20px;
+  fill: rgba(255, 255, 255, 0.5);
+  transition: fill 0.3s ease-in-out;
+}
+
+.sci li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  transition: background 0.3s ease-in-out;
+}
+
+.sci li a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.sci li a:hover .icon {
+  fill: rgba(255, 255, 255, 1);
+}
+
+/* about */
+/* Efek Flip pada Gambar */
+.book {
+  position: relative;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 320px;
+  height: 420px;
+  background-color: whitesmoke;
+  box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.3);
+  transform: perspective(2000px);
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: pointer;
+}
+
+.cover,
+.inner-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+}
+
+/* Cover Depan */
+.cover {
+  background-color: lightgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover Me Text */
+.hover-message {
+  position: absolute;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.6);
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeInOut 2.5s infinite ease-in-out;
+}
+
+/* Animasi Muncul & Hilang */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Konten Belakang */
+.inner-content {
+  background: linear-gradient(135deg, #5A8F62, #75A56F);
+  color: white;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transform: rotateY(180deg);
+  box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Header */
+.inner-content h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #FFD700; /* Kuning Emas */
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Subtext */
+.inner-content p {
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+/* List Keunggulan */
+.inner-content ul {
+  margin-top: 10px;
+  width: 100%;
+  text-align: left;
+  list-style: none;
+  padding: 0;
+}
+
+/* List Item */
+.inner-content ul li {
+  font-size: 0.95rem;
+  padding: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Ikon Hijau */
+.inner-content ul li::before {
+  content: "✔";
+  color: #FFD700;
+  font-weight: bold;
+}
+
+/* Animasi saat Hover */
+.book:hover {
+  transform: perspective(2000px) rotateY(-180deg);
+}
+
+.inner-content ul li:hover {
+  transform: translateX(8px);
+  color: #FFF;
+}
+
+/* Animasi Flip yang Lebih Smooth */
+.book:hover .cover {
+  transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+
+/* Our Services - Animasi Button */
+/* Tombol 3D */
+.button {
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  border-width: 0;
+  padding: 0 8px 12px;
+  min-width: 10em;
+  box-sizing: border-box;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.button-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 0;
+  padding: 8px 16px;
+  transform: translateY(0);
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.25);
+  transition-property: transform;
+  transition-duration: 0.2s;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.button:active .button-top {
+  transform: translateY(6px);
+}
+
+.button-top::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(#61875c, #75a56f);
+  box-shadow: inset 0 0 0px 1px rgba(255, 255, 255, 0.2), 0 1px 2px 1px rgba(255, 255, 255, 0.2);
+  transition: border-radius 0.2s, padding 0.2s, width 0.2s, transform 0.2s;
+}
+
+.button-bottom {
+  position: absolute;
+  z-index: -1;
+  bottom: 4px;
+  left: 4px;
+  border-radius: 10px / 16px;
+  padding-top: 6px;
+  width: calc(100% - 8px);
+  height: calc(100% - 10px);
+  background-color: #a3c39d;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.5), inset 0 -1px 3px 3px rgba(0, 0, 0, 0.4);
+}
+
+
+
+/* our porotofolio */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
