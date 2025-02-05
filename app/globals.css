@@ -7,6 +7,15 @@ body {
   @apply bg-background text-headline font-gotosans ;
 }
 
+background-color: rgba(255, 255, 255, 0.5);
+
+
+.blur-bg {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+
 /* team.css */
 .wrapper {
   position: absolute;

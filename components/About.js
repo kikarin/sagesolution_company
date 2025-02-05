@@ -71,20 +71,20 @@ export default function About() {
 
   return (
     <section ref={aboutRef} className="relative py-16 md:py-24 overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-20">
           <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-[#75A56F] to-[#4B7355] bg-clip-text text-transparent">
             About Us
           </h2>
-          <p className="mt-4 text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-4">
+          <p className="mt-4 text-base md:text-lg text-gray-600 dark:text-gray-300">
             Menyediakan solusi inovatif berbasis teknologi yang menghubungkan generasi
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-center">
           {/* Image Section */}
-          <div ref={imageRef} className="relative group mx-auto max-w-sm md:max-w-md lg:max-w-full">
+          <div ref={imageRef} className="relative group mx-auto lg:mx-0 max-w-sm md:max-w-md lg:max-w-full">
             <div className="book transform transition-all duration-700 hover:scale-105">
               {/* Front Cover with Professional Styling */}
               <div className="cover relative overflow-hidden rounded-xl shadow-2xl">
@@ -123,7 +123,7 @@ export default function About() {
           </div>
 
           {/* Text Content */}
-          <div ref={textRef} className="space-y-6 md:space-y-8 px-4">
+          <div ref={textRef} className="space-y-6 md:space-y-8">
             <div className="overflow-hidden">
               <h3 className="text-3xl font-bold text-[#75A56F] mb-6">
                 TENTANG <span className="text-gray-900 dark:text-white">SAGE SOLUTION</span>

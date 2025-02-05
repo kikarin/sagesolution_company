@@ -33,12 +33,9 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative min-h-screen flex items-center">
-      {/* Background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-100 dark:from-gray-900 dark:to-gray-800 transition-all duration-500" />
-
+    <section ref={heroRef} className="relative min-h-screen flex items-center backdrop-blur-lg bg-white/10 dark:bg-gray-900/10">
       {/* Content container */}
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Text content */}
           <div ref={textRef} className="space-y-8">
@@ -96,9 +93,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
-      {/* Decorative elements */}
-      <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-white/50 to-transparent dark:from-gray-900/50" />
     </section>
   );
 }
@@ -107,10 +101,8 @@ export default function Hero() {
 function StatsCard({ number, text, darkMode }) {
   return (
     <div
-      className={`p-6 rounded-xl transition-all duration-500 ${
-        darkMode
-          ? "bg-gray-800/50 backdrop-blur-sm text-white"
-          : "bg-white/90 backdrop-blur-sm shadow-lg text-gray-900"
+      className={`p-6 rounded-xl transition-all duration-500 backdrop-blur-md bg-white/30 dark:bg-gray-900/30 shadow-lg ${
+        darkMode ? "text-white" : "text-gray-900"
       }`}
     >
       <h3 className="text-3xl md:text-4xl font-bold text-asset mb-2">

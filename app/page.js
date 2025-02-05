@@ -8,6 +8,7 @@ import OurPortfolio from "../components/OurPortfolio";
 import FAQ from "../components/FAQ";
 import Testimonials from "../components/Testimonials";
 import Blog from "../components/Blog";
+import Modal from "../components/Modal";
 export default function Home() {
   return (
     <>
@@ -21,6 +22,7 @@ export default function Home() {
       <FAQ />
       <Testimonials />
       <Blog />
+      <Modal />
     </>
   );
 }

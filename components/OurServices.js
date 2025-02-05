@@ -92,20 +92,22 @@ export default function OurServices() {
 
   return (
     <section ref={sectionRef} className="relative py-20 text-gray-900 dark:text-gray-100">
-      <div className="container mx-auto px-6 max-w-6xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-400 via-[#75A56F] to-gray-600 bg-clip-text text-transparent">
             Our Services
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 mt-4">LAYANAN YANG KAMI SEDIAKAN</p>
+          <p className="text-lg text-gray-600 dark:text-gray-300 mt-4">
+            LAYANAN YANG KAMI SEDIAKAN
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {services.map((service, index) => (
             <Tilt key={index} tiltMaxAngleX={10} tiltMaxAngleY={10} glareEnable glareBorderRadius="12px">
               <div
                 ref={(el) => (cardRefs.current[index] = el)}
-                className="p-6 rounded-lg shadow-lg bg-gray-200 dark:bg-gray-800/40 backdrop-blur-lg flex flex-col items-center text-center transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-transparent hover:border-[#75A56F] relative h-full"
+                className="p-6 rounded-lg shadow-lg bg-white/70 dark:bg-gray-800/70 backdrop-blur-none flex flex-col items-center text-center transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-transparent hover:border-[#75A56F] relative h-full"
               >
                 <img src={service.icon} alt="Icon" className="w-16 h-16 mb-4 transition-transform duration-300 hover:scale-110" />
                 <h3 className="text-2xl font-bold text-[#75A56F]">{service.title}</h3>

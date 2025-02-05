@@ -32,5 +32,26 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        '.backdrop-blur-none': {
+          'backdrop-filter': 'blur(0)',
+          '-webkit-backdrop-filter': 'blur(0)'
+        },
+        '.backdrop-blur-sm': {
+          'backdrop-filter': 'blur(4px)',
+          '-webkit-backdrop-filter': 'blur(4px)'
+        },
+        '.backdrop-blur-md': {
+          'backdrop-filter': 'blur(8px)',
+          '-webkit-backdrop-filter': 'blur(8px)'
+        },
+        '.backdrop-blur-lg': {
+          'backdrop-filter': 'blur(12px)',
+          '-webkit-backdrop-filter': 'blur(12px)'
+        }
+      })
+    }
+  ],
 };

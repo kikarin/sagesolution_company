@@ -29,9 +29,8 @@ export default function RecentBlog() {
   ]);
 
   return (
-    <section className="bg-gradient-to-br from-[#ECFDF5] to-[#D1FAE5] dark:from-gray-900 dark:to-gray-800 
-      py-16 md:py-20 px-4 sm:px-6 md:px-12 transition-all duration-300">
-      <div className="max-w-6xl mx-auto">
+    <section className="bg-gradient-to-br from-[#ECFDF5] to-[#D1FAE5] dark:from-gray-900 dark:to-gray-800 py-16 md:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Header */}
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-[#75A56F] dark:text-[#A3D9A5] text-base md:text-lg font-semibold tracking-widest uppercase">
