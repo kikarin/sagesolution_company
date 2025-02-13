@@ -112,12 +112,6 @@ export default function OurServices() {
                 <img src={service.icon} alt="Icon" className="w-16 h-16 mb-4 transition-transform duration-300 hover:scale-110" />
                 <h3 className="text-2xl font-bold text-[#75A56F]">{service.title}</h3>
                 <p className="text-lg mt-4 flex-grow">{service.description}</p>
-
-                {/* Tombol 3D */}
-                <button className="relative group overflow-hidden bg-[#75A56F] text-white px-5 py-2 rounded-lg shadow-md transition-transform duration-300 hover:scale-110 mt-4">
-                  <span className="absolute top-0 left-0 w-0 h-full bg-white opacity-20 transition-all duration-300 group-hover:w-full"></span>
-                  <span className="relative z-10">Hubungi Kami</span>
-                </button>
               </div>
             </Tilt>
           ))}

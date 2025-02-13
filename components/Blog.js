@@ -3,30 +3,46 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+const blogs = [
+  {
+    id: 1,
+    title: "Cloud Computing: Masa Depan Infrastruktur Bisnis",
+    desc: "Manfaat menggunakan cloud computing untuk efisiensi bisnis.",
+    image: "/1.jpg",
+    link: "/blog/1",
+  },
+  {
+    id: 2,
+    title: "AI dan Machine Learning untuk Perusahaan",
+    desc: "Bagaimana AI bisa mengubah cara perusahaan bekerja.",
+    image: "/1.jpg",
+    link: "/blog/2",
+  },
+  {
+    id: 3,
+    title: "Strategi IT yang Harus Dimiliki Startup",
+    desc: "Strategi teknologi yang dapat membantu startup berkembang lebih cepat dan efisien.",
+    image: "/1.jpg",
+    link: "/blog/3",
+  },
+  {
+    id: 4,
+    title: "Transformasi Digital untuk Bisnis Anda",
+    desc: "Pelajari bagaimana transformasi digital bisa meningkatkan efisiensi dan profitabilitas perusahaan Anda.",
+    image: "/1.jpg",
+    link: "/blog/4",
+  },
+  {
+    id: 5,
+    title: "Keamanan Siber: Perlindungan Data Perusahaan",
+    desc: "Tips terbaik untuk menjaga keamanan data perusahaan Anda dari ancaman cyber.",
+    image: "/1.jpg",
+    link: "/blog/5",
+  },
+];
+
 export default function RecentBlog() {
-  const [blogs, setBlogs] = useState([
-    {
-      id: 1,
-      title: "Transformasi Digital untuk Bisnis Anda",
-      desc: "Pelajari bagaimana transformasi digital bisa meningkatkan efisiensi dan profitabilitas perusahaan Anda.",
-      image: "/1.jpg",
-      link: "/blog/transformasi-digital",
-    },
-    {
-      id: 2,
-      title: "Keamanan Siber: Perlindungan Data Perusahaan",
-      desc: "Tips terbaik untuk menjaga keamanan data perusahaan Anda dari ancaman cyber.",
-      image: "/1.jpg",
-      link: "/blog/keamanan-siber",
-    },
-    {
-      id: 3,
-      title: "Strategi IT yang Harus Dimiliki Startup",
-      desc: "Strategi teknologi yang dapat membantu startup berkembang lebih cepat dan efisien.",
-      image: "/1.jpg",
-      link: "/blog/strategi-it-startup",
-    },
-  ]);
+  const [showAll, setShowAll] = useState(false);
 
   return (
     <section className="bg-gradient-to-br from-[#ECFDF5] to-[#D1FAE5] dark:from-gray-900 dark:to-gray-800 py-16 md:py-20">
@@ -46,7 +62,7 @@ export default function RecentBlog() {
 
         {/* Blog Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
-          {blogs.map((blog) => (
+          {blogs.slice(0, showAll ? blogs.length : 3).map((blog) => (
             <Link key={blog.id} href={blog.link} className="group relative block">
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-all duration-300 transform hover:scale-[1.03] hover:shadow-2xl">
                 <div className="relative h-60">
@@ -74,15 +90,14 @@ export default function RecentBlog() {
           ))}
         </div>
 
-        {/* View All Button (Tombol 3D) */}
+        {/* View All Button */}
         <div className="text-center mt-12">
-          <Link href="/blog">
-            <button className="button">
-              <div className="button-top">View All Posts</div>
-              <div className="button-bottom"></div>
-              <div className="button-base"></div>
-            </button>
-          </Link>
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="bg-[#75A56F] dark:bg-[#A3D9A5] hover:bg-black dark:hover:bg-white text-white font-bold dark:text-black py-4 px-8 rounded-lg text-lg transition duration-300 shadow-lg"
+          >
+            {showAll ? "Tampilkan Lebih Sedikit" : "View All Posts"}
+          </button>
         </div>
       </div>
     </section>
